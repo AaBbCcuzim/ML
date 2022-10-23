@@ -6,6 +6,7 @@ import com.yx.core.Data;
 
 public class KKMeans {
 	public int k;
+	public double minJ;
 	public int dataLine;
 	public int dataColumn;
 	public int resultLine;
@@ -23,6 +24,115 @@ public class KKMeans {
 		this.dataColumn=d.Column-1;
 		this.k=k;
 	}
+	
+	public void runKKMeans(int times) {
+		resultLine = dataLine;
+		resultColumn = dataColumn+1;
+		result = new double [dataLine+1][dataColumn+2];
+		centerData = new double [k+1][dataColumn+1];
+		for(int q=1;q<=times;q++) {
+			int toLine;
+			int toColumn;
+			boolean stop;
+			double [][] toResult ;
+			double [][] toCenterData = new double [k+1][dataColumn+1];
+			int [] labor_cnt = new int [dataLine+1];
+	 		
+			Random r = new Random();
+			
+			for(int i=1;i<=k;i++) {
+				toCenterData[i] = data[r.nextInt(dataLine)+1];
+			}
+			while(true) {
+				double [][] newCenterData = new double[k+1][dataColumn+1];
+				int [] labornum = new int[k+1];
+				stop = true;
+				
+				for(int i=1;i<=dataLine;i++) {
+					int labor = 0;
+					double edge = 0;
+					for(int j=1;j<=k;j++) {
+						double edget = 0;
+						for(int t=1;t<=dataColumn;t++) {
+							edget += (data[i][t]-toCenterData[j][t])*(data[i][t]-toCenterData[j][t]);
+						}
+						if(labor == 0 || edget < edge) {
+							labor = j;
+							edge = edget;
+						}
+						
+					}
+					if(labor_cnt[i] != labor) {
+						stop = false;
+					}
+					labor_cnt[i] = labor;
+				}
+				if(stop == true) {
+					toLine = dataLine;
+					toColumn = dataColumn+1;
+					toResult = new double[toLine+1][toColumn+1];
+					for(int i=1;i<=dataLine;i++) {
+						for(int j=1;j<=dataColumn;j++) {
+							toResult [i][j] = data[i][j];
+						}
+						toResult[i][dataColumn+1] = labor_cnt[i];
+					}
+					break;
+				}
+				for(int i=1;i<=dataLine;i++) {
+					int laborc = labor_cnt[i];
+					for(int j=1;j<=dataColumn;j++) {
+						newCenterData[laborc][j] += data[i][j];				
+					}
+					labornum[laborc]++;
+				}
+				for(int i=1;i<=k;i++) {
+					for(int j=1;j<=dataColumn;j++) {
+						newCenterData[i][j]/=labornum[i];
+					}
+					toCenterData[i] = newCenterData[i];
+				}
+			}
+			double cj = 0;
+			for(int i=1;i<=toLine;i++) {
+				double sum = 0;
+				for(int j=1;j<=toColumn-1;j++) {
+					sum+=(toResult[i][j]-toCenterData[(int)toResult[i][toColumn]][j])*(toResult[i][j]-toCenterData[(int)toResult[i][toColumn]][j]);
+				}
+				cj+=sum;
+			}
+			cj/=toLine;
+			if(q==1) {
+				minJ = cj;
+				for(int i=1;i<=toLine;i++) {
+					for(int j=1;j<=toColumn;j++) {
+						result[i][j]=toResult[i][j];
+					}
+				}
+				for(int i=1;i<=k;i++) {
+					for(int j=1;j<=toColumn-1;j++) {
+						centerData[i][j]=toCenterData[i][j];
+					}
+				}
+			}
+			else {
+				if(cj<minJ) {
+					minJ=cj;
+					for(int i=1;i<=toLine;i++) {
+						for(int j=1;j<=toColumn;j++) {
+							result[i][j]=toResult[i][j];
+						}
+					}
+					for(int i=1;i<=k;i++) {
+						for(int j=1;j<=toColumn-1;j++) {
+							centerData[i][j]=toCenterData[i][j];
+						}
+					}
+				}
+			}
+		}
+ 	}
+	
 	
 	public void runKKMeans() {
 		result = new double [dataLine+1][dataColumn+2];
@@ -157,7 +267,7 @@ public class KKMeans {
 			for(int j=1;j<=dataColumn;j++) {
 				System.out.print(centerData[i][j]+" ");
 			}
-			System.out.println(i);
+			System.out.println("");
 		}
 	}
 }

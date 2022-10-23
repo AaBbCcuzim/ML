@@ -16,7 +16,7 @@ public class KKMeansTest {
 		int k = 3;
 		KKMeans kt = new KKMeans(d,k);
 		System.out.println("Access create Kmeans");
-		kt.runKKMeans();
+		kt.runKKMeans(100);
 		System.out.println("Access run Kmeans");
 		kt.printResult();
 		System.out.println("Access printresult Kmeans");
