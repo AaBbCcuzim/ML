@@ -18,10 +18,14 @@ public class KKMeans {
 	public double [][] result;
 	public double [][] predict;
 	
-	public KKMeans(Data d,int k) {
+	//ju means have tag or no tag,tag to true,no tag to false 
+	public KKMeans(Data d,int k,boolean ju) { 
 		this.data=d.calData;		
 		this.dataLine=d.Line;
-		this.dataColumn=d.Column-1;
+		if(ju) {
+			this.dataColumn=d.Column-1;
+		}
+		else this.dataColumn=d.Column;
 		this.k=k;
 	}
 	
@@ -117,6 +121,7 @@ public class KKMeans {
 			}
 			else {
 				if(cj<minJ) {
+					
 					minJ=cj;
 					for(int i=1;i<=toLine;i++) {
 						for(int j=1;j<=toColumn;j++) {

@@ -13,8 +13,9 @@ public class KKMeansTest {
 	public void mainTest() {
 		String f = fileTest.class.getClassLoader().getResource("testdata2.txt").getPath();
 		Data d = FileReaderFromCsv.loadFile(new File(f));
+		d.print();
 		int k = 3;
-		KKMeans kt = new KKMeans(d,k);
+		KKMeans kt = new KKMeans(d,k,true);
 		System.out.println("Access create Kmeans");
 		kt.runKKMeans(100);
 		System.out.println("Access run Kmeans");

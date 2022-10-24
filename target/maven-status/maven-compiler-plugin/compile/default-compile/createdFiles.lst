@@ -1,6 +1,10 @@
 com\yx\file\FileWriter.class
+com\yx\methods\meanNormalization.class
 com\yx\core\Data.class
 com\yx\file\FileReader.class
+com\yx\methods\Covariance.class
+com\yx\methods\PCA.class
+com\yx\core\DataOrMatrix.class
 com\yx\methods\KKMeans.class
 com\yx\file\FileReaderFromCsv.class
 com\yx\file\FileReaderFromTxt.class

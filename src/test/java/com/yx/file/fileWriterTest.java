@@ -19,7 +19,7 @@ public class fileWriterTest {
 		String fa = fileWriterTest.class.getClassLoader().getResource("testdata2.txt").getPath();	
 		Data d = FileReaderFromCsv.loadFile(new File(fa));
 		int k = 3;
-		KKMeans ke = new KKMeans(d,k);
+		KKMeans ke = new KKMeans(d,k,true);
 		ke.runKKMeans();
 		String fb = fileWriterTest.class.getClassLoader().getResource("testdata3.txt").getPath();
 		File f = new File(fb);

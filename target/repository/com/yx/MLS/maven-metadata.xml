@@ -3,10 +3,10 @@
   <groupId>com.yx</groupId>
   <artifactId>MLS</artifactId>
   <versioning>
-    <release>1.1.0-MLT</release>
+    <release>2.0.1-MLT</release>
     <versions>
-      <version>1.1.0-MLT</version>
+      <version>2.0.1-MLT</version>
     </versions>
-    <lastUpdated>20221023013822</lastUpdated>
+    <lastUpdated>20221024101611</lastUpdated>
   </versioning>
 </metadata>

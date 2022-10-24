@@ -1,5 +1,8 @@
+com\yx\methods\covarianceTest.class
 com\yx\file\fileTest.class
+workAll.class
 com\yx\file\fileWriterTest.class
 com\yx\core\coreTest.class
 com\yx\methods\KKMeansTest.class
+com\yx\methods\meanNormalizationTest.class
 com\yx\file\fileReaderTest.class
